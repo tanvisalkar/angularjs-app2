@@ -1,0 +1,39 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>{{ heading }}</h2>
+    <form name="registerForm" ng-submit="submitForm(registerForm.$valid)" novalidate>
+        <div class="form-group" ng-class="{ 'has-error' : (registerForm.firstName.$invalid) && submitted }">
+            <label for="firstName">Firstname</label>
+            <input type="text" name="firstName" id="firstName" ng-model="form.firstName" class="form-control" required />
+            <span ng-show="registerForm.firstName.$error.required && submitted" class="help-block">firstname is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (registerForm.lastName.$invalid) && submitted }">
+            <label for="lastName">Lastname</label>
+            <input type="text" name="lastName" id="lastName" ng-model="form.lastName" class="form-control" required />
+            <span ng-show="registerForm.lastName.$error.required && submitted" class="help-block">lastname is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (registerForm.email.$invalid || hasUserErrorMessage) && submitted }">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" ng-model="form.email" class="form-control" required />
+            <span ng-show="registerForm.email.$error.required && submitted" class="help-block">Email is required</span>
+            <span ng-show="registerForm.email.$error.email && submitted" class="help-block">Invalid Email</span>
+            <span ng-show="hasUserErrorMessage && submitted" class="help-block">{{ userErrorMessage }}</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.password.$invalid && submitted}">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" ng-model="form.password" class="form-control" required />
+            <span ng-show="registerForm.password.$error.required && submitted" class="help-block">Password is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.confirmPassword.$invalid && submitted }">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" ng-model="form.confirmPassword" class="form-control" password-confirm match-target="form.password" required />
+            <span ng-show="registerForm.confirmPassword.$error.required && submitted" class="help-block">Confirm Password is required</span>
+            <span ng-show="!registerForm.confirmPassword.$error.required && registerForm.confirmPassword.$error.match && submitted" class="help-block">Passwords do not match</span>
+        </div>
+        <div class="alert alert-success" ng-show="hasSuccess">
+            {{successMsg}}
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
